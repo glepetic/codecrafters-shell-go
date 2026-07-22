@@ -12,6 +12,7 @@ import (
 var _ = fmt.Print
 
 func main() {
+	cmd.Init()
 	for {
 		var userInput string
 		n := readNext(&userInput)
@@ -22,13 +23,7 @@ func main() {
 		} else {
 			command = userInput
 		}
-		executableCommand := cmd.SelectCommand(command);
-		if executableCommand != nil {
-			executableCommand.Execute(args);
-		} else {
-			fmt.Printf("%s: command not found\r\n", command)
-		}
-
+		cmd.SelectCommand(command).Execute(args)
 	}
 }
 
