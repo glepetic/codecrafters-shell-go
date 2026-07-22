@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/codecrafters-io/shell-starter-go/app/cmd"
 )
 
 // Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
@@ -14,12 +16,19 @@ func main() {
 		var userInput string
 		n := readNext(&userInput)
 		var command string
+		var args = strings.Split(userInput, " ")
 		if n > 1 {
-			command = strings.Split(userInput, " ")[0]
+			command = args[0]
 		} else {
 			command = userInput
 		}
-		fmt.Printf("%s: command not found\r\n", command)
+		executableCommand := cmd.SelectCommand(command);
+		if executableCommand != nil {
+			executableCommand.Execute(args);
+		} else {
+			fmt.Printf("%s: command not found\r\n", command)
+		}
+
 	}
 }
 
