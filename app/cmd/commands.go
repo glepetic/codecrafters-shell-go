@@ -18,6 +18,7 @@ func Init() {
 	commands = make(map[string]CommandStrategy)
 	commands["exit"] = ExitCommand{}
 	commands["echo"] = EchoCommand{}
+	commands["type"] = TypeCommand{}
 }
 
 func SelectCommand(command string) CommandStrategy {
@@ -26,4 +27,8 @@ func SelectCommand(command string) CommandStrategy {
 		return UnknownCommand{}
 	}
 	return commandStrategy
+}
+
+func Exists(command string) bool {
+	return commands[command] != nil
 }
