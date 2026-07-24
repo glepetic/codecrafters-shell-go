@@ -1,6 +1,9 @@
 package cmd
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type CommandStrategy interface {
 	Execute(parameters []string)
@@ -30,5 +33,5 @@ func SelectCommand(command string) CommandStrategy {
 }
 
 func Exists(command string) bool {
-	return commands[command] != nil
+	return commands[strings.ToLower(command)] != nil
 }
